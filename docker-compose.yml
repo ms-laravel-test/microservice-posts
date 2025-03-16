@@ -22,6 +22,7 @@ services:
             - '.:/var/www/html'
         networks:
             - sail
+            - laravel_network
         depends_on:
             - mysql
     mysql:
@@ -62,6 +63,9 @@ services:
 networks:
     sail:
         driver: bridge
+    laravel_network:
+        external: true
+
 volumes:
     sail-mysql:
         driver: local
