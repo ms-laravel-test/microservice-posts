@@ -6,6 +6,7 @@ use App\Jobs\SendPostNotification;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Http\JsonResponse;
 
 class PostController extends Controller
 {
@@ -14,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -67,5 +68,12 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function getUserPosts($userId): JsonResponse
+    {
+        $posts = Post::query()
+            ->where('user_id', $userId)->get();
+        return response()->json($posts);
     }
 }
